@@ -1,8 +1,32 @@
-version: '3'
+version: '3.8'
 services:
-  app:
-    build: .
+  postgres:
+    build:
+      context: ./dockerfile/psql
+    container_name: postgres_container
     ports:
-      - 5000:5000
+      - '5432:5432'
+    environment:
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=user
+      - POSTGRES_DB=patient_data
     volumes:
-      - ./data:/app/data
+      - ./data:/docker-entrypoint-initdb.d/data
+      - ./init-script.sh:/docker-entrypoint-initdb.d/init-script.sh
+    networks:
+      - backend
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: app_container
+    ports:
+      - '5000:5000'
+    depends_on:
+      - postgres
+    networks:
+      - backend
+
+networks:
+  backend:
+    driver: bridge
