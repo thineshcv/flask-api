@@ -44,7 +44,7 @@ jobs:
           context: .
           push: false
           tags: |
-            273030403034.dkr.ecr.us-west-2.amazonaws.com/py_api:${{ github.ref_slug }}-${{ github.run_number }}
+            273030403034.dkr.ecr.us-west-2.amazonaws.com/py_api:latest
 
  
       - name: Configure AWS credentials
@@ -58,5 +58,5 @@ jobs:
 
       - name: Push Docker image to ECR
         run: |
-          docker push 273030403034.dkr.ecr.us-west-2.amazonaws.com/py_api:${{ github.ref_slug }}-${{ github.run_number }}
+          docker push 273030403034.dkr.ecr.us-west-2.amazonaws.com/py_api:latest
   
