@@ -13,7 +13,7 @@
 * API exposed at port `localhost:5000` .
 * In v0.0.2 once both the containers are up and running, run `python load_json_to_postgresql.py` to laod the data to the database.
 
-## v0.0.3
+## v0.0.4
 ### Flask API 
 * Read JSON files from local filessytem
 * test case using pytest mocking is added to test /data/<filename>. To run tests run `pytest tests`
