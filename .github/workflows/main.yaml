@@ -54,3 +54,18 @@ jobs:
           push: true
           tags: |
             273030403034.dkr.ecr.us-west-2.amazonaws.com/py_api:latest
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: <desired_terraform_version> # Specify the Terraform version you want to use
+
+      - name: Initialize Terraform
+        working-directory: tf-aws
+        run: |
+          terraform init
+          terraform validate # Optional: Run validation to check for any syntax errors
+
+      - name: Deploy infrastructure
+        working-directory: tf-aws
+        run: terraform apply -auto-approve
